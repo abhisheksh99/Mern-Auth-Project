@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/userRoute.js";
 import connectDB from "./config/Db.js";
 import { errorHandler, notFound } from "./middleware/errorHandlerMiddleware.js";
+import cookieParser from "cookie-parser";
 
 // Load environment variables
 dotenv.config();
@@ -14,6 +15,8 @@ connectDB()
 
 // Middleware
 app.use(express.json()); 
+app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
 
 // Get the port from environment variables or use a default
 const PORT = process.env.PORT || 3000;
