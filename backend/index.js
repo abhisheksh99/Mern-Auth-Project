@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoute.js";
 import connectDB from "./config/Db.js";
+import { errorHandler, notFound } from "./middleware/errorHandlerMiddleware.js";
 
 // Load environment variables
 dotenv.config();
@@ -19,6 +20,10 @@ const PORT = process.env.PORT || 3000;
 
 // Routes
 app.use("/api/users", userRoutes);
+
+
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
